@@ -1,35 +1,29 @@
 import React, { useRef, useState } from 'react';
 import * as XLSX from "xlsx";
-import { read, writeFileXLSX } from "xlsx";
 import DataProcessor from './DataProcessor';
+import '../styles/styles.css';
 
 const FileSpecInput = () => {
-    const filePickerRef = useRef(null);
-    const [selectedFile, setSelectedFile] = useState(null);
-    const [fileName, setFileName] = useState(null);
+    const [selectedFile, setSelectedFile] = useState(null); 
 
     const [specLimit, setSpecLimit] = useState('');
     const [steps, setSteps] = useState('');
 
-    // const readFile = (e) => {
-    //     const reader = new FileReader();
-    //     if(e.target.files[0]){
-    //         reader.readAsDataURL(e.target.files[0]);
-    //     }
-    //     reader.onload = (readerEvent) => {
-    //         setSelectedFile(readerEvent.target.result.arrayBuffer());
-    //     };
-    //     setFileName(e.target.files[0].name);
-    // }
     const handleFileInput = async (e) => {
         const file = e.target.files[0];
         const data = await file.arrayBuffer();
         const workbook = XLSX.read(data);
 
-        console.log(workbook);
+        const worksheet = workbook.Sheets[workbook.SheetNames[0]];
+        const jsonData = XLSX.utils.sheet_to_json(worksheet, {
+            header: 1,
+            defval: '',
+        });
+
+        setSelectedFile(jsonData);
     }
 
-    const handleInputChange = (input) => {
+    const handleInput = (input) => {
         if(input.target.name == "specLimit"){
             setSpecLimit(input.target.value);
         } else if(input.target.name == 'steps') {
@@ -38,25 +32,15 @@ const FileSpecInput = () => {
     }
 
     return(
-        <>
-            {/* <button onClick={() => filePickerRef.current.click()}>
-                Choose File: (.xls, .xlsx)
-            </button>
-            <input type="file" ref={filePickerRef} onChange={readFile} hidden/> */}
+        <div className='inputForm'>
             <input type="file" onChange={(e)=>{ handleFileInput(e) }}/>
-            {/* { fileName ? (
-                <div>{fileName}</div>
-                ) : (
-                <div> -- File Name -- </div>
-            )} */}
-
             <label htmlFor="specLimit">Specification Limit:</label>
-            <input id='specLimit' name='specLimit' type='number' onChange={handleInputChange}/>
+            <input id='specLimit' name='specLimit' type='number' onChange={handleInput}/>
             <label htmlFor="steps">Steps:</label>
-            <input id='steps' name='steps' type='number' onChange={handleInputChange}/>
+            <input id='steps' name='steps' type='number' onChange={handleInput}/>
             
             <DataProcessor file={selectedFile} specLimit={specLimit} steps={steps}/>
-        </>
+        </div>
     );
 }
 
