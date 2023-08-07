@@ -26,7 +26,7 @@ const cleanupData = (file, steps) => {
     const cleanYdev = removeEmptyElements(Ydev);
     const cleanDia = removeEmptyElements(Dia);
 
-    return[cleanXdev, cleanYdev, cleanDia];
+    return[cleanXdev, cleanYdev, cleanDia, trimmedData.length];
 }
 
 export default cleanupData;
