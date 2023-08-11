@@ -26,7 +26,7 @@ const filterData = (Xdev, Ydev, Dia, tolP) => {
         let _filteredXdev = [];
         let _filteredYdev = [];
         let _filteredDia = [];
-        for(let j = 0; j < Xdev[0].length; j++){
+        for(let j = 0; j < Xdev[i].length; j++){
             if(
                 isDevValid(Xdev[i][j], Dia[i])
                 && isDevValid(Ydev[i][j], Dia[i])

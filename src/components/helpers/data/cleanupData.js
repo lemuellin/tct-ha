@@ -25,7 +25,7 @@ const cleanupData = (file, steps, tolP) => {
     }
 
     // Filter Data 
-    const filteredData = filterData(Xdev, Ydev, Dia, tolP);
+    const filteredData = filterData(removeEmptyElements(Xdev), removeEmptyElements(Ydev), removeEmptyElements(Dia), tolP);
     const filteredXdev = filteredData[0];
     const filteredYdev = filteredData[1];
     const filteredDia = filteredData[2];
