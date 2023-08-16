@@ -12,7 +12,7 @@ const isDiaValid = (value, Dia, tolP) => {
 }
 
 const isDevValid = (value, Dia) => {
-    const avgDia = Dia.reduce((sum, ele) => sum + Number(ele), 0) / Dia.length;   
+    const avgDia = Dia.reduce((sum, ele) => sum + Number(ele), 0) / Dia.length / 1000;
     return avgDia - Math.abs(value) > 0;
 }
 
@@ -34,7 +34,7 @@ const filterData = (Xdev, Ydev, Dia, tolP) => {
             ){
                 _filteredXdev.push(Xdev[i][j]);
                 _filteredYdev.push(Ydev[i][j]);
-                _filteredDia.push(Dia[i][j]);
+                _filteredDia.push(Dia[i][j] / 1000);
             }else{
                 // replace out-of-tolerance data to ''
                 _filteredXdev.push('');
