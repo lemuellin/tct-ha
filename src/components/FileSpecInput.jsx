@@ -8,6 +8,7 @@ const FileSpecInput = () => {
 
     const [specLimit, setSpecLimit] = useState('');
     const [steps, setSteps] = useState('');
+    const [filter, setFilter] = useState('on');
 
     const handleFileInput = async (e) => {
         const file = e.target.files[0];
@@ -28,6 +29,12 @@ const FileSpecInput = () => {
             setSpecLimit(input.target.value);
         } else if(input.target.name == 'steps') {
             setSteps(input.target.value);
+        } else if(input.target.name == 'filter') {
+            if(input.target.checked){
+                setFilter('off');
+            }else{
+                setFilter('on');
+            }
         }
     }
 
@@ -38,8 +45,11 @@ const FileSpecInput = () => {
             <input id='specLimit' name='specLimit' type='number' onChange={handleInput}/>
             <label htmlFor="steps">Steps:</label>
             <input id='steps' name='steps' type='number' onChange={handleInput}/>
-            
-            <DataProcessor file={selectedFile} specLimit={specLimit} steps={steps}/>
+            <div className='filterBox'>
+                <input id='filter' name='filter' type='checkbox' onChange={handleInput}/>
+                <label htmlFor="filter" className='filterLabel'>Turn off Data Filter</label>
+            </div>
+            <DataProcessor file={selectedFile} specLimit={specLimit} steps={steps} filter={filter}/>
         </div>
     );
 }

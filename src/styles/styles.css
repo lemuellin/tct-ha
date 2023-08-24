@@ -25,9 +25,28 @@ label{
     text-align: left;
 }
 
+.filterBox{
+    width: 20rem;
+    margin-top: 1rem;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.filterLabel{
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
 input{
     width: 20rem;
     height: 1.5rem;
+}
+
+#filter{
+    width: 1rem;
+    height: 1rem;
 }
 
 button{

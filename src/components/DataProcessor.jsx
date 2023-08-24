@@ -18,7 +18,7 @@ const DataProcessor = (props) => {
             return;
         }
 
-        const data = cleanupData(props.file, props.steps, tolP);
+        const data = cleanupData(props.file, props.steps, props.filter, tolP);
         const cleanXdev = data[0];
         const cleanYdev = data[1];
         const cleanDia = data[2];
@@ -99,7 +99,7 @@ const DataProcessor = (props) => {
             row7.push(data[4][0][i], data[4][1][i], data[4][2][i]);
             row8.push(data[5][0][i], data[5][1][i], data[5][2][i]);
 
-            row11.push(data[0][i] + '/' + props.steps);
+            row11.push(data[0][i]);
             row12.push(Math.min(data[5][0][i], data[5][1][i], data[5][2][i]));
         }
         
