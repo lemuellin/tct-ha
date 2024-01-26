@@ -86,9 +86,14 @@ const DataProcessor = (props) => {
         let row7 = ['Avg + 4S'];
         let row8 = ['CPK'];
         let row9 = [''];
+
         let row10 = ['Summary'];
         let row11 = ['Sample Size'];
         let row12 = ['Linear CPK'];
+        let row13 = ['Radial CPK']
+        let row14 = ['Radial Avg + 4S'];
+        let row15 = ['Radial Max Deviation']
+
         for(let i = 0; i < data[0].length; i++){
             row1.push(props.steps * i + 1 + '-' + props.steps * (i + 1), '', '');
             row2.push(data[0][i] + '/' + props.steps, '', '');
@@ -101,9 +106,12 @@ const DataProcessor = (props) => {
 
             row11.push(data[0][i]);
             row12.push(Math.min(data[5][0][i], data[5][1][i]));
+            row13.push(data[5][2][i]);
+            row14.push(data[4][2][i]);
+            row15.push(data[1][2][i]);
         }
         
-        aoa.push(row1, row2, row3, row4, row5, row6, row7, row8, row9, row10, row11, row12);
+        aoa.push(row1, row2, row3, row4, row5, row6, row7, row8, row9, row10, row11, row12, row13, row14, row15);
          /* create worksheet */
         const worksheet = XLSX.utils.aoa_to_sheet(aoa);
         /* create workbook and export */
